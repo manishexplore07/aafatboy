@@ -1,0 +1,116 @@
+﻿@model HrManagement.Models.Employee
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Employee</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Emp_Name" class="control-label"></label>
+                <input asp-for="Emp_Name" class="form-control" />
+                <span asp-validation-for="Emp_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Emp_Age" class="control-label"></label>
+                <input asp-for="Emp_Age" class="form-control" />
+                <span asp-validation-for="Emp_Age" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Emp_Gender" class="control-label">Gender</label>
+                <div class="form-check">
+                    <input type="radio" asp-for="Emp_Gender" value="Male" class="form-check-input" id="genderMale" />
+                    <label for="genderMale" class="form-check-label">Male</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" asp-for="Emp_Gender" value="Female" class="form-check-input" id="genderFemale" />
+                    <label for="genderFemale" class="form-check-label">Female</label>
+                </div>
+                <span asp-validation-for="Emp_Gender" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Emp_Mobile" class="control-label"></label>
+                <input asp-for="Emp_Mobile" class="form-control" type="tel" />
+                <span asp-validation-for="Emp_Mobile" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Emp_Salary" class="control-label"></label>
+                <input asp-for="Emp_Salary" class="form-control" type="number" min="0" step="0.01" placeholder="Enter salary" />
+                <span asp-validation-for="Emp_Salary" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Dep_Id" class="control-label">Department</label>
+                <select asp-for="Dep_Id" class="form-control">
+                    <option value="">-- Select Department --</option> <!-- Corrected Default Option -->
+                    @foreach (var item in ViewBag.Departments)
+                    {
+                        <option value="@item.Dep_Id"> @item.DepartmentName </option>
+                    }
+                </select>
+                <span asp-validation-for="Dep_Id" class="text-danger"></span> <!-- Fixed validation target -->
+            </div>
+
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Emp_Status" /> @Html.DisplayNameFor(model => model.Emp_Status)
+                </label>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" id ="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+                    <script>
+                        $(document).ready(function()){
+                            $('Emp_Name').focus();
+                        });
+
+                        $("#submit").click(function(){
+
+                        });
+
+
+
+    var Name = $('#Emp_Name').val();
+    var Age = $('#Emp_Age').val();
+    var Gender = $("<input[name='#Emp_Gender']:checked").val();
+   
+
+
+
+    if(Name == null || Name == ""){
+        toastr.error("Name Can Notification Be Empty");
+        return;
+    }
+    if(Age == null || Age == "" || isNaN(Age) || parseInt(Age)<=0{
+        toastr.error("Age Can Notification Be Empty");
+        return;
+    }
+
+    if(Gender == null || Gender == ""){
+        toastr.error("Gender Can Notification Be Empty");
+        return;
+    }
+      });
+                    </script>
